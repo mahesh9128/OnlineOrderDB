@@ -1,0 +1,2 @@
+INFO	?	main	2017-01-25T17:15:55.786Z	org.javacs.Main#connectToNode	Connected to parent using socket on port 55282
+INFO	?	main	2017-01-25T17:15:56.249Z	org.javacs.JavaLanguageServer#doLint	Lint [m:\workspace\OrderDB\src\javaCode\queriesDB.java]

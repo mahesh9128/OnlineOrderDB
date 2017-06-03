@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Online Food Order</title>
+<link rel="stylesheet" href="../css/gallery.css">
+<link rel="stylesheet" href="../styles/bootstrap.min.css" />
+<script src="../scripts/queriescust.js"></script>
+<style>
+.body {
+	padding-top: 60px;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<nav class="navbar navbar-fixef-top">
+			<div class="container">
+				<div class="navbar-header">
+					<h3 class="col-md-6">ONLINE FOOD ORDERING SYSTEM</h3>
+					<img class="col-md-4" src="../images/panda.jpg" width="150"
+						height="150" position="relative" /> <input
+						class="col-md-2 push-right" type="button" id="logout"
+						value="logout" />
+				</div>
+			</div>
+		</nav>
+
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#tab1" role="tab" data-toggle="tab">Query
+					1</a></li>
+			<li><a href="#tab2" role="tab" data-toggle="tab">Query 2</a></li>
+			<li><a href="#tab3" role="tab" data-toggle="tab">Query 3</a></li>
+			<li><a href="#tab4" role="tab" data-toggle="tab">Query 4</a></li>
+			<li><a href="#tab5" role="tab" data-toggle="tab">Query 5</a></li>
+			<li><a href="#tab8" role="tab" data-toggle="tab">Query 6</a></li>
+			<li><a href="#tab10" role="tab" data-toggle="tab">Query 7</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="active tab-pane fade in" id="tab1">
+				<h4>Query : Retrieve the list of restaurants of a particular
+					area and of particular cuisine!</h4>
+				<h4>SQL : SELECT
+					R.restId,R.name,R.cuisine,R.status,R.address,RT.openTime,RT.closeTime
+					FROM `dbproject`.`restaurant` as R, `dbproject`.`rest_timings` as
+					RT WHERE R.restId=RT.restId and address like 'area' and
+					R.cuisine='cuisine' order by R.name ;</h4>
+				<form class="form-horizontal" id="queryform1">
+					<div class="form-group">
+						<label class="control-label col-md-2" for="areaid">Area</label>
+						<div class="col-md-2">
+							<input type="text" class="form-control" id="areaid" name="areaid" />
+						</div>
+						<label class="control-label col-md-2" for="cuisineid">Cuisine</label>
+						<div class="col-md-2">
+							<input type="text" class="form-control" id="cuisineid"
+								name="cuisineid" />
+						</div>
+						<input type="button" class="btn btn-primary col-md-2"
+							value="Execute" id="querybtn1" />
+					</div>
+				</form>
+				<div id="query1"></div>
+			</div>
+			<div class="tab-pane fade" id="tab2">
+				<h4>Query : Display all the Restaurants with their cuisine and
+					open at the “current time”!</h4>
+				<h4>SQL : SET time_zone = '-06:00'; SELECT
+					R.restId,R.name,R.cuisine,R.status,R.address,RT.openTime,RT.closeTime
+					FROM `dbproject`.`restaurant` as R, `dbproject`.`rest_timings` as
+					RT WHERE R.restId=RT.restId and R.cuisine='cusine' and CURTIME()
+					BETWEEN RT.openTime and RT.closeTime;</h4>
+				<form class="form-horizontal" id="queryform2">
+					<div class="form-group">
+						<label class="control-label col-md-2" for="cuisineid2">Cuisine</label>
+						<div class="col-md-2">
+							<input type="text" class="form-control" id="cuisineid2"
+								name="cuisineid2" />
+						</div>
+						<input type="button" class="btn btn-primary col-md-2"
+							value="Execute" id="querybtn2" />
+					</div>
+				</form>
+				<div id="query2"></div>
+			</div>
+			<div class="tab-pane fade" id="tab3">
+				<h4>Query : View all the menu items of a restaurant with
+					particular cuisine having the combo prices less than given price.</h4>
+				<h4>SQL : SELECT
+					R.name,M.comboId,M.appetizer,M.mainCourse,M.dessert,M.price FROM
+					`dbproject`.`restaurant` as R,`dbproject`.`menu` as M WHERE
+					R.restId=M.restId and R.cuisine='cuisine' GROUP BY M.comboId HAVING
+					M.price< price;</h4>
+				<form class="form-horizontal" id="queryform3">
+					<div class="form-group">
+						<label class="control-label col-md-2" for="cuisineid3">Cuisine</label>
+						<div class="col-md-2">
+							<input type="text" class="form-control" id="cuisineid3"
+								name="cuisineid3" />
+						</div>
+						<label class="control-label col-md-2" for="price3">Price</label>
+						<div class="col-md-2">
+							<input type="text" class="form-control" id="price3" name="price3" />
+						</div>
+						<input type="button" class="btn btn-primary col-md-2"
+							value="Execute" id="querybtn3" />
+					</div>
+				</form>
+				<div id="query3"></div>
+			</div>
+			<div class="tab-pane fade" id="tab4">
+				<h4>Query : View the discount on a Combo ID of any restaurant
+					on a particular day of the week.</h4>
+				<h4>SQL : SELECT R.name,D.comboId,D.discount FROM
+					`dbproject`.`restaurant` as R,`dbproject`.`discount` as D WHERE
+					R.restId=D.restId and R.name="restaurant name" and D.comboId=
+					"comboID" and D.day='day of the week';</h4>
+				<form class="form-horizontal" id="queryform4">
+					<div class="form-group">
+						<label class="control-label col-md-1" for="name4">Restaurant</label>
+						<div class="col-md-2">
+							<input type="text" class="form-control" id="name4" name="name4" />
+						</div>
+						<label class="control-label col-md-1" for="comboid4">Comb
+							ID</label>
+						<div class="col-md-2">
+							<input type="text" class="form-control" id="comboid4"
+								name="comboid4" />
+						</div>
+						<label class="control-label col-md-1" for="day4">Day</label>
+						<div class="col-md-2">
+							<input type="text" class="form-control" id="day4" name="day4" />
+						</div>
+						<input type="button" class="btn btn-primary col-md-2"
+							value="Execute" id="querybtn4" />
+					</div>
+				</form>
+				<div id="query4"></div>
+			</div>
+			<div class="tab-pane fade" id="tab5">
+				<h4>Query : View the overall (average) rating of restaurants.</h4>
+				<h4>SQL : SELECT R.name as RESTAURANT,avg(rating) as OVERALL_RATING
+					FROM `dbproject`.`restaurant` as R,`dbproject`.`review` as RV WHERE
+					R.restId=RV.restId GROUP BY R.name ORDER BY OVERALL_RATING;</h4>
+				<div id="query5"></div>
+			</div>
+			<div class="tab-pane fade" id="tab8">
+				<h4>Query : Display the restaurant with highest ratings.</h4>
+				<h4>select RESTAURANT_NAME,Rating from
+					`dbproject`.`high_rating_view` where Rating in (SELECT max(Rating)
+					from `dbproject`.`high_rating_view`);</h4>
+				<div id="query8"></div>
+			</div>
+			<div class="tab-pane fade" id="tab10">
+				<h4>Query : View all the comments and the ratings given by
+					customers about a particular restaurant.</h4>
+				<h4>SQL : SELECT RV.custId,R.name,RV.comment,RV.rating FROM
+					`dbproject`.`restaurant` as R,`dbproject`.`review` as RV WHERE
+					R.restId=RV.restId and R.name = 'restaurant name' GROUP BY RV.custId;
+				</h4>
+				<form class="form-horizontal" id="queryform10">
+					<div class="form-group">
+						<label class="control-label col-md-2" for="name10">Restaurant
+							Name</label>
+						<div class="col-md-2">
+							<input type="text" class="form-control" id="name10" name="name10" />
+						</div>
+						<input type="button" class="btn btn-primary col-md-2"
+							value="Execute" id="querybtn10" />
+					</div>
+				</form>
+				<div id="query10"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../scripts/jquery-3.1.1.min.js">
+		
+	</script>
+	<script src="../scripts/bootstrap.min.js">
+		
+	</script>
+</body>
+
+</html>

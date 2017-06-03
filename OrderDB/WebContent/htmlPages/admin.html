@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Online Food Order</title>
+    <link rel="stylesheet" href="../css/gallery.css">
+    <link rel="stylesheet" href="../styles/bootstrap.min.css" />
+    <script src="../scripts/queriesadmin.js"></script>
+    <style>
+        .body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-fixef-top">
+
+            <div class="navbar-header">
+                <h3 class="col-md-6">ONLINE FOOD ORDERING SYSTEM</h3>
+                <img class="col-md-4" src="../images/panda.jpg" width="150" height="150" position="relative" />
+                <div class="navbar-right" style="float:right">
+                    <input class="col-md-12" type="button" id="logout" value="logout" style="float:right" />
+                </div>
+            </div>
+
+        </nav>
+
+        <ul class="nav nav-tabs">
+
+            <li class="active"><a href="#tab6" role="tab" data-toggle="tab">Query 1</a></li>
+            <li><a href="#tab7" role="tab" data-toggle="tab">Query 2</a></li>
+            <li><a href="#tab9" role="tab" data-toggle="tab">Query 3</a></li>
+            <li><a href="#tab11" role="tab" data-toggle="tab">Query 4</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="active tab-pane fade in" id="tab6">
+                <h4>Query : View the customer's address with a particular order number.
+                </h4>
+                <h4>SQL : SELECT C.fname,C.address FROM `dbproject`.`customer` as C,`dbproject`.`order` as O WHERE C.custId=O.custId and O.orderNum="order num";</h4>
+                <form class="form-horizontal" id="queryform6">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="order6">Order
+							Num</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="order6" name="order6" />
+                        </div>
+                        <input type="button" class="btn btn-primary col-md-2" value="Execute" id="querybtn6" />
+                    </div>
+                </form>
+                <div id="query6"></div>
+            </div>
+            <div class="tab-pane fade" id="tab7">
+                <h4>Query : Find all orders whose status is “pending” and get its count.</h4>
+                <h4>SQL : SELECT COUNT(*) as No_of_pending_orders FROM `dbproject`.`order` as O WHERE O.status='pending';</h4>
+                <div id="query7"></div>
+            </div>
+            <div class="tab-pane fade" id="tab9">
+                <h4>Query : View all the orders that are pending for delivery to customer who lives in particular area.</h4>
+                <h4>SQL : SELECT O.comboId,O.custId,O.orderNum,O.restId FROM `dbproject`.`customer` as C,`dbproject`.`order` as O WHERE C.custId=O.custId and C.address like 'area' and O.status='pending';</h4>
+                <form class="form-horizontal" id="queryform9">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="addr9">Address</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="addr9" name="addr9" />
+                        </div>
+                        <input type="button" class="btn btn-primary col-md-2" value="Execute" id="querybtn9" />
+                    </div>
+                </form>
+                <div id="query9"></div>
+            </div>
+            <div class="tab-pane fade" id="tab11">
+                <h4>Query : Cancel the order with order number and display the same.
+                </h4>
+                <h4>SQL : call `cancel_order`(order num);</h4>
+                <form class="form-horizontal" id="queryform11">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="order11">Order
+							Num</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="order11" name="order11" />
+                        </div>
+                        <input type="button" class="btn btn-primary col-md-2" value="Execute" id="querybtn11" />
+                    </div>
+                </form>
+                <div id="query11"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/jquery-3.1.1.min.js">
+    </script>
+    <script src="../scripts/bootstrap.min.js">
+    </script>
+</body>
+
+</html>

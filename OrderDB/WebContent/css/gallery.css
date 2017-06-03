@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+
+/*Name this external file gallery.css*/
+
+body {
+    background-color: white;
+}
+
+#preview {
+    position: text-align: top center;
+}
+
+.image {
+    align-self: stretch;
+    position: relative;
+    width: 75px;
+    height: 50px;
+}
+
+img {
+    width: 95%;
+}
+
+#head {
+    color: black;
+    text-align: center;
+}
